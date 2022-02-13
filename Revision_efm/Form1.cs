@@ -127,14 +127,14 @@ namespace Revision_efm
         private void btnAjouter_Click(object sender, EventArgs e)
         {
 
-            DataRow ligne = tb.NewRow();
-            ligne[0] = textCode.Text;
-            ligne[1] = textNom.Text;
-            ligne[2] = textTele.Text;
-            ligne[3] = dateEmb.Value;
-            ligne[4] = cbSepecilite.Text;
-            tb.Rows.Add(ligne);
-            dataGridView1.DataSource = ds;
+            //DataRow ligne = tb.NewRow();
+            //ligne[0] = textCode.Text;
+            //ligne[1] = textNom.Text;
+            //ligne[2] = textTele.Text;
+            //ligne[3] = dateEmb.Value;
+            //ligne[4] = cbSepecilite.Text;
+            //tb.Rows.Add(ligne);
+            //dataGridView1.DataSource = ds;
 
 
 
@@ -154,17 +154,17 @@ namespace Revision_efm
         private void btnRchercher_Click(object sender, EventArgs e)
         {
 
-            for(int i = 0; i < tb.Rows.Count; i++)
-            {
-                if (tb.Rows[i][0].ToString() == textCode.Text)
-                {
-                    textCode.Text = tb.Rows[i][0].ToString();
-                    textNom.Text = tb.Rows[i][1].ToString();
-                    textTele.Text = tb.Rows[i][2].ToString();
-                    dateEmb.Value =DateTime.Parse(tb.Rows[i][3].ToString());
-                    break;
-                }
-            }
+            //for(int i = 0; i < tb.Rows.Count; i++)
+            //{
+            //    if (tb.Rows[i][0].ToString() == textCode.Text)
+            //    {
+            //        textCode.Text = tb.Rows[i][0].ToString();
+            //        textNom.Text = tb.Rows[i][1].ToString();
+            //        textTele.Text = tb.Rows[i][2].ToString();
+            //        dateEmb.Value =DateTime.Parse(tb.Rows[i][3].ToString());
+            //        break;
+            //    }
+            //}
 
 
 
@@ -193,23 +193,23 @@ namespace Revision_efm
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
 
-            try
-            {
-                tb.DefaultView.Sort = "codemedcin ASC";
+            //try
+            //{
+            //    tb.DefaultView.Sort = "codemedcin ASC";
 
-                int index = tb.DefaultView.Find(textCode.Text);
+            //    int index = tb.DefaultView.Find(textCode.Text);
 
-                tb.Rows[index].Delete();
-                //dt.AcceptChanges();
+            //    tb.Rows[index].Delete();
+            //    //dt.AcceptChanges();
 
-                MessageBox.Show("bien Supprimer");
+            //    MessageBox.Show("bien Supprimer");
 
-                dataGridView1.DataSource = tb;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            };
+            //    dataGridView1.DataSource = tb;
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //};
 
 
 
@@ -231,19 +231,19 @@ namespace Revision_efm
         private void btnModifier_Click(object sender, EventArgs e)
         {
 
-            for (int i = 0; i < tb.Rows.Count; i++)
-            {
-                if (tb.Rows[i][0].ToString() == textCode.Text)
-                {
-                    tb.Rows[i][1] = textNom.Text;
-                    tb.Rows[i][2] = textTele.Text;
-                    tb.Rows[i][3] = dateEmb.Value;
-                    tb.Rows[i][4] = cbSepecilite.Text;
-                    break;
-                }
-            }
+            //for (int i = 0; i < tb.Rows.Count; i++)
+            //{
+            //    if (tb.Rows[i][0].ToString() == textCode.Text)
+            //    {
+            //        tb.Rows[i][1] = textNom.Text;
+            //        tb.Rows[i][2] = textTele.Text;
+            //        tb.Rows[i][3] = dateEmb.Value;
+            //        tb.Rows[i][4] = cbSepecilite.Text;
+            //        break;
+            //    }
+            //}
 
-            dataGridView1.DataSource = tb;
+            //dataGridView1.DataSource = tb;
 
 
 
