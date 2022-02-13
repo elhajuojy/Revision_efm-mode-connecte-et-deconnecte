@@ -35,7 +35,7 @@ namespace Revision_efm
         //    cmd = new SqlCommand("select * from medecin  where codemedcin="+code,ctn);
         //    ctn.Open();
         //    SqlDataReader dr = cmd.ExecuteReader();
-            
+
         //    table.Load(dr);
         //    int pos = -1;
         //    for (int i = 0; i < table.Rows.Count; i++)
@@ -62,21 +62,31 @@ namespace Revision_efm
         //    dateEmb.Value =DateTime.Parse( table.Rows[pos][3].ToString());
         //    cbSepecilite.Text = table.Rows[pos][4].ToString();
         //    dataGridView1.DataSource = table;
-            
-           
+
+
         //}
 
+        Gest_RDVEntities db = new Gest_RDVEntities();
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            ctn = new SqlConnection(@"Data Source=elhajuojy-lapto\mehdi;Initial Catalog=Gest_RDV;Integrated Security=True");
-            cmd = new SqlCommand("select * from medecin", ctn);
-            cmd1 = new SqlCommand("select distinct(specialitemedecin) from medecin", ctn);
-            dr = new SqlDataAdapter(cmd);
-            tb = new DataTable();
-            dr.Fill(tb);
+            //ctn = new SqlConnection(@"Data Source=elhajuojy-lapto\mehdi;Initial Catalog=Gest_RDV;Integrated Security=True");
+            //cmd = new SqlCommand("select * from medecin", ctn);
+            //cmd1 = new SqlCommand("select distinct(specialitemedecin) from medecin", ctn);
+            //dr = new SqlDataAdapter(cmd);
+            //tb = new DataTable();
+            //dr.Fill(tb);
+
+            var select = db.medecins.Select(x => new
+            {
+                code = x.codemedcin,
+                nom = x.nommedecin,
+                tel = x.telmedecin,
+            });
 
 
+
+            dataGridView1.DataSource = select.ToList(); 
 
 
 
@@ -95,21 +105,21 @@ namespace Revision_efm
             //table1.Load(dr1);
             //ctn.Close();
 
-            bs.DataSource =tb ;
+            //bs.DataSource =tb ;
 
             //textCode.DataBindings.Add("Text", bs, "codemedcin");
             //textNom.DataBindings.Add("Text", bs, "nommedecin");
             //textTele.DataBindings.Add("Text", bs, "telmedecin");
             //dateEmb.DataBindings.Add("Value", bs, "dateEmbauche");
             //cbSepecilite.DataBindings.Add("Text", bs, "specialitemedecin");
-            
 
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            dataGridView1.DataSource = bs;
-           // cbSepecilite.DataSource = bs;
-           // cbSepecilite.DisplayMember = "specialitemedecin";
-            
+            //dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //dataGridView1.DataSource = bs;
+            // cbSepecilite.DataSource = bs;
+            // cbSepecilite.DisplayMember = "specialitemedecin";
+
 
 
         }
@@ -126,6 +136,25 @@ namespace Revision_efm
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
+            medecin m1 = new medecin();
+            m1.codemedcin= textCode.Text;
+            m1.nommedecin= textNom.Text;
+            m1.dateEmbauche = dateEmb.Value;
+            db.medecins.Add(m1);
+            db.SaveChanges();
+
+            MessageBox.Show("bine Ajouter");
+
+
+
+
+
+
+
+
+
+
+
 
             //DataRow ligne = tb.NewRow();
             //ligne[0] = textCode.Text;
@@ -153,6 +182,22 @@ namespace Revision_efm
 
         private void btnRchercher_Click(object sender, EventArgs e)
         {
+
+
+            medecin me1 = new medecin();
+            me1.codemedcin = textCode.Text;
+
+            var sme1 = from m in db.medecins
+                  where m.codemedcin == me1.codemedcin
+                  select m;
+          
+
+            dataGridView1.DataSource=sme1.ToList();
+
+           
+
+
+
 
             //for(int i = 0; i < tb.Rows.Count; i++)
             //{
@@ -193,6 +238,25 @@ namespace Revision_efm
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
 
+
+
+            medecin me1 = new medecin();
+            me1.codemedcin = textCode.Text;
+
+             me1 = (from m in db.medecins
+                       where m.codemedcin == me1.codemedcin
+                       select m).FirstOrDefault();
+
+            db.medecins.Remove(me1);
+            db.SaveChanges();
+            dataGridView1.DataSource=db.medecins.ToList();
+
+
+
+
+
+
+
             //try
             //{
             //    tb.DefaultView.Sort = "codemedcin ASC";
@@ -230,6 +294,39 @@ namespace Revision_efm
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
+            medecin me1 = new medecin();
+            me1.codemedcin = textCode.Text;
+
+            me1 = (from m in db.medecins
+                   where m.codemedcin == me1.codemedcin
+                   select m).FirstOrDefault();
+
+            me1.nommedecin= textNom.Text;
+            me1.dateEmbauche = dateEmb.Value;
+            
+
+
+
+            
+            db.SaveChanges();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             //for (int i = 0; i < tb.Rows.Count; i++)
             //{
@@ -310,6 +407,22 @@ namespace Revision_efm
             report.SetDataSource(tb);
             (f2.Controls["crystalReportViewer1"] as CrystalReportViewer).ReportSource = report;
             f2.Show();
+
+        }
+
+        private void cbSepecilite_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            medecin me1 = new medecin();
+            me1.codemedcin = textCode.Text;
+
+            me1 = (from m in db.medecins
+                   where m.codemedcin == me1.codemedcin
+                   select m).FirstOrDefault(); 
+
+            textCode.Text= me1.codemedcin.ToString();
+            textNom.Text=me1.nommedecin.ToString();
+            dateEmb.Value = me1.dateEmbauche.Value;
+
 
         }
     }

@@ -73,7 +73,7 @@ namespace Revision_efm
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 17);
+            this.label1.Size = new System.Drawing.Size(85, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "code medcin";
             // 
@@ -225,7 +225,7 @@ namespace Revision_efm
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 17);
+            this.label2.Size = new System.Drawing.Size(33, 16);
             this.label2.TabIndex = 16;
             this.label2.Text = "nom";
             // 
@@ -241,7 +241,7 @@ namespace Revision_efm
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 130);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 17);
+            this.label3.Size = new System.Drawing.Size(29, 16);
             this.label3.TabIndex = 18;
             this.label3.Text = "tele";
             // 
@@ -250,7 +250,7 @@ namespace Revision_efm
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(381, 34);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 17);
+            this.label4.Size = new System.Drawing.Size(102, 16);
             this.label4.TabIndex = 20;
             this.label4.Text = "date Embauche";
             // 
@@ -266,7 +266,7 @@ namespace Revision_efm
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(400, 86);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.Size = new System.Drawing.Size(67, 16);
             this.label5.TabIndex = 22;
             this.label5.Text = "Sepecilite";
             // 
@@ -277,6 +277,7 @@ namespace Revision_efm
             this.cbSepecilite.Name = "cbSepecilite";
             this.cbSepecilite.Size = new System.Drawing.Size(121, 24);
             this.cbSepecilite.TabIndex = 23;
+            this.cbSepecilite.SelectionChangeCommitted += new System.EventHandler(this.cbSepecilite_SelectionChangeCommitted);
             // 
             // Form1
             // 
